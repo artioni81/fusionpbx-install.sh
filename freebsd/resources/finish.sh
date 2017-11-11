@@ -15,7 +15,8 @@ if [ .$nginx_enabled = .'true' ]; then
 	#database details
 	database_username=fusionpbx
 	if [ .$database_password = .'random' ]; then
-		database_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+		#database_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+		database_password=$(cat /dev/random | env LC_CTYPE=C tr -dc 0-9 | head -c 20)
 	fi
 
 	#allow the script to use the new password
@@ -73,7 +74,8 @@ if [ .$nginx_enabled = .'true' ]; then
 	user_salt=$(/usr/local/bin/php /usr/local/www/fusionpbx/resources/uuid.php);
 	user_name=$system_username
 	if [ .$system_password = .'random' ]; then
-		user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+		#user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+		user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc 0-9 | head -c 20)
 	else
 		user_password=$system_password
 	fi
@@ -104,8 +106,10 @@ fi
 if [ .$switch_enabled = .'true' ]; then
 
 	#update xml_cdr url, user and password
-	xml_cdr_username=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
-	xml_cdr_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+	#xml_cdr_username=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+	#xml_cdr_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+	xml_cdr_username=$(cat /dev/random | env LC_CTYPE=C tr -dc 0-9 | head -c 20)
+	xml_cdr_password=$(cat /dev/random | env LC_CTYPE=C tr -dc 0-9 | head -c 20)
 
 	#set the conf directory
 	if [ .$switch_source = ."package" ]; then
