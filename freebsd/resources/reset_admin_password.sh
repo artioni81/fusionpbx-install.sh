@@ -18,9 +18,10 @@ elif [ .$admin_users = .'' ]; then
 else
 	admin_uuids=$(sudo -u postgres psql fusionpbx -Atc "select v_users.user_uuid from v_users JOIN v_group_users USING (domain_uuid) where username='$system_username' and group_name = 'superadmin'")
 	for admin_uuid in $admin_uuids; do
-		user_salt=$(/usr/bin/php /var/www/fusionpbx/resources/uuid.php);
+		user_salt=$(/usr/local/bin/php /var/www/fusionpbx/resources/uuid.php);
 		if [ .$system_password = .'random' ]; then
-			user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+			#user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 20)
+			user_password=$(cat /dev/random | env LC_CTYPE=C tr -dc 0-9 | head -c 20)
 		else
 			user_password=$system_password
 		fi
